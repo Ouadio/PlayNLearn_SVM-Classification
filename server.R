@@ -1,10 +1,10 @@
   
 
-################################# CONTROLLER   LAYER  USING SHINY (V2.0) #####################################
+################################# CONTROLLER   LAYER  USING SHINY (V1.0) #####################################
 
 
 library(shiny)
-source("./svmRegul.R")
+source("./model.R")
 
 shinyServer(function(input, output) {
    
