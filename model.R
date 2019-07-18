@@ -112,7 +112,7 @@ generateData = function(N, complexite = 1, seed = 2019, show = FALSE){
 
 
 
-fitSVMReg = function(data = myData, cost = 2, ker = "linear", gamma = 0.01, degree = 3,right = 7, left = 2, mode1 = T){
+fitSVMReg = function(data = myData, cost = 2, ker = "linear", gamma = 0.01, degree = 3,right = 7, left = 2, mode = T){
   inTrain = data$x>right | data$x<left
   trainData = data[inTrain,]
   testData = data[!inTrain,]
@@ -120,12 +120,14 @@ fitSVMReg = function(data = myData, cost = 2, ker = "linear", gamma = 0.01, degr
   if(ker == "linear"){
     fitSVM<-svm(formula = label~.,data = trainData, kernel = ker, cost = cost, scale = T)
   }
-  else
+  else{
     if(ker =='polynomial'){
       fitSVM<-svm(formula = label~.,data = trainData, kernel = ker, gamma = gamma,cost = cost, degree = degree,scale = T)
     }
-  else
+  else{
     fitSVM<-svm(formula = label~.,data = trainData, kernel = ker, gamma = gamma,cost = cost,scale = T)
+    
+  }}
     
   
   predsTr = predict(fitSVM,newdata = trainData)
@@ -140,7 +142,7 @@ fitSVMReg = function(data = myData, cost = 2, ker = "linear", gamma = 0.01, degr
   correctTr = round(as.numeric(confMatrixTr$overall[1]), digits = 3)*100
   correctTs = round(as.numeric(confMatrixTs$overall[1]), digits = 3)*100
   
-  if(mode1){
+  if(mode){
     plotData(data = data, right = right, left = left)
     points(trainData$x[trIsCorrect], trainData$y[trIsCorrect], cex = 1.8, col="green3")
     points(testData$x[tsIsCorrect], testData$y[tsIsCorrect], cex = 1.8, col="green3")

@@ -45,7 +45,8 @@ shinyUI(fluidPage(
                                                                        radial = "radial"),
                    selected = "linear"),
       
-       radioButtons("mode", "Visualization Theme", choices = c(mode1 = "T", mode2 = "F"), selected="T")
+       radioButtons("mode", "Visualization Theme", choices = c(mode1 = "T", mode2 = "F"), selected="T"),
+      actionButton("showSVM","Plot SVM Classification results")
     ),
     
     # Show a plot of the generated distribution
